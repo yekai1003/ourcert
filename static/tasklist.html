@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务分发平台</title>
+    <!--引入css 需要用这个标签-->
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/tasklist.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/tasklist.js"></script>
+    <script src="js/axios.js"></script>
+
+
+
+</head>
+
+<body>
+    
+
+
+<!--弹出发布任务窗口-->
+<div id="ReleaseTask" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">发布任务</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="GetWorker"></label>
+                    <input type="email" class="form-control" id="GetWorker" placeholder="指定任务接受人">
+                    <label for="GetToken"></label>
+                    <input type="email" class="form-control" id="GetToken" placeholder="任务悬赏">
+                    <label for="GetTaskInfo"></label>
+                    <input type="email" class="form-control" id="GetTaskInfo" placeholder="任务描述">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="close_win btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="ConfirmRelease btn btn-primary">确认发布</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--弹出提交任务窗口-->
+<div id="SubmitTask" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">提交任务</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="GetTaskID"></label>
+                    <input type="email" class="form-control" id="GetTaskID" placeholder="taskID">
+                    <label for="TaskInformation"></label>
+                    <input type="email" class="form-control" id="TaskInformation" placeholder="描述信息">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="close_win btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="ConfirmSubmission btn btn-primary">确认提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--弹出验收任务窗口-->
+<div id="ConfirmTask" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">验收任务</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="taskid"></label>
+                    <input type="email" class="form-control" id="taskid" placeholder="taskID">
+                    <label for="TaskStatus"></label>
+                    <input type="email" class="form-control" id="TaskStatus" placeholder="任务完成状态">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="close_win btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="TaskConfirm btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--弹出领取任务窗口-->
+<div id="ReceiveTask" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">领取任务</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="ReceiveTaskID"></label>
+                    <input type="email" class="form-control" id="ReceiveTaskID" placeholder="taskID">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="close_win btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="ConfirmReceive btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="userInfo">
+    <ul>
+        <li class="userName">
+            <span></span>
+            <span> </span>
+        </li>
+        
+        <li class="balance">
+            <span></span>
+            <span></span>
+        </li>
+    </ul>
+</div>
+
+
+    <div class="container-msg">
+        <div class="pdjtask">
+            <div>
+                <div class='btn-margin'>
+                    <button type="button" class="Createtk btn btn-danger">发布任务</button>
+                    <button type="button" class="Receive btn btn-primary">领取任务</button>
+                    <button type="button" class="Commit btn btn-primary">提交任务</button>
+                    <button type="button" class="Confirm btn btn-primary">验收任务</button>                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div class="tktable">
+<table class="table table-condensed">     
+    <!-- On rows -->
+
+
+<!-- On cells (`td` or `th`) -->
+<tr>
+  <td class="active">任务ID</td>
+  <td class="success">创建者</td>
+  <td class="warning">委托人</td>
+  <td class="danger">悬赏</td>
+  <td class="info">任务状态</td>
+  <td class="active">remark</td>
+  <td class="success">comment</td>
+</tr>
+<tbody id="list"></tbody>
+
+</table>
+</div>
+
+</body>
+</html>
+    
